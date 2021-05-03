@@ -6,7 +6,7 @@ import Loader from '../../../../components/Loader/index';
 export default function TableCategory({categories, onEdit, onDelete}){
     return (
         <div className={s.container_table_category}>
-            <table>
+            <table className={s.table}>
                 <thead className={s.container_thead}>
                     <tr>
                         <th>Id</th>

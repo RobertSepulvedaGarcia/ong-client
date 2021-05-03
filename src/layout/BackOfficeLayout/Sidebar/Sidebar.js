@@ -25,11 +25,11 @@ export default function Sidebar() {
           icon={<i className="fa fa-dashboard" aria-hidden="true"></i>}
           text="Dashboard"
         />
-        <NavItem
+        {/*<NavItem
           to="/back-office/account"
           icon={<i className="fa fa-user" aria-hidden="true"></i>}
           text="Mi cuenta"
-        />
+        /> */}
       </NavSidebar>
 
       <NavSidebar titleNav="Administración">

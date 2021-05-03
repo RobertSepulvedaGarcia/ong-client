@@ -7,7 +7,7 @@ const BackOfficeLayout = ({ children }) => (
     <Sidebar />
     <div id="content-wrapper" className="d-flex flex-column">
       <Navbar />
-      <div id="content" className="container-fluid p-4">
+      <div id="content" className="container-fluid p-1">
         {children}
       </div>
     </div>

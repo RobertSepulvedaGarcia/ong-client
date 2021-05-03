@@ -15,6 +15,7 @@ import { Route } from 'react-router-dom';
 import ProtectedAdmin from '../ProtectedRoutes/ProtectedAdmin';
 import BackOfficeLayout from '../../layout/BackOfficeLayout/BackOfficeLayout';
 import FormTestimonial from '../FormTestimonial';
+import Users from '../../pages/BackofficePages/Users/Users';
 
 function BackOfficeRoutes() {
   return (
@@ -72,7 +73,17 @@ function BackOfficeRoutes() {
         path="/back-office/categories"
         exact
       >
-        <ProtectedAdmin component={CategoriesAbm}/>
+        <BackOfficeLayout>
+          <ProtectedAdmin component={CategoriesAbm}/>
+        </BackOfficeLayout>
+      </Route>
+      <Route
+        path="/back-office/users"
+        exact
+      >
+        <BackOfficeLayout>
+          <ProtectedAdmin component={Users}/>
+        </BackOfficeLayout>
       </Route>
       {/* IMPLEMENT BACK-OFFICE COMPONENT */}
       <Route path="/back-office" exact>
