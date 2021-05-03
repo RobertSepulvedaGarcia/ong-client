@@ -11,7 +11,8 @@ import NewsDetailedPage from '../../pages/DetailNew';
 
 /* Modulos */
 
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { AnimatedSwitch } from 'react-router-transition';
 import Protected from '../ProtectedRoutes/Protected';
 import MainLayoutRoute from '../MainLayoutRoute';
 import BackOfficeRoutes from './backOfficeRoutes';
@@ -19,7 +20,11 @@ import MainLayout from '../../layout/MainLayout/MainLayout';
 
 const layout = () => {
   return (
-    <Switch>
+    <AnimatedSwitch
+      atEnter={{ opacity: 0 }}
+      atLeave={{ opacity: 0 }}
+      atActive={{ opacity: 1 }}
+    >
       {/* <Route path="/activity/:id" component={DetailActivity} />  commented only for presentation */}
       {/* PAGE TO LIST ALL THE ACTIVITIES IS MISSING */}
       {/* <Route path="/activity" exact component={HomePage} /> commented only for presentation  */}
@@ -35,7 +40,7 @@ const layout = () => {
       </Route>
       <MainLayoutRoute path="/" exact component={HomePage} />
       <BackOfficeRoutes />
-    </Switch>
+    </AnimatedSwitch>
   );
 };
 
