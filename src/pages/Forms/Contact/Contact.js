@@ -1,51 +1,35 @@
 import React, { useState } from 'react';
-import CustomTextArea from '../../../components/CustomTextArea/CustomTextArea';
-import EmailInput from '../../../components/EmailInput/EmailInput';
-import TextInput from '../../../components/TextInput/TextInput';
-import CustomButton from '../../../components/CustomButton/CustomButton';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { validation } from './validations';
+import { useHistory } from 'react-router';
+import CustomTextInput from './CustomTextInput';
 import { Helmet } from 'react-helmet';
-
 import photoBg from '../../../assets/images/Foto-7.jpg';
 import './Contact.css';
-import axios from 'axios';
+import ErrorAlert from '../../../components/Alerts/ErrorAlert';
+import { postHttpRequest } from '../../../helper/axios';
 
 function Contact() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const history = useHistory();
   const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
 
-  const submitted = {};
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (name.length === 0 || email.length === 0 || message.length === 0) {
-      setError('All the fields are required');
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      setError('Invalid email address');
-    } else {
-      setError('');
-      submitted.name = name;
-      submitted.email = email;
-      submitted.message = message;
-      createContact(name, email, message);
-    }
-  };
-  const createContact = async (name, email, message) => {
+  const createContact = async ({ name, email, phone, message }) => {
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/contacts`,
-        {
-          name,
-          email,
-          message,
-        }
-      );
+      const res = await postHttpRequest(`/contacts`, {
+        name,
+        email,
+        phone,
+        message,
+      });
       console.log(res);
+      history.push('/');
     } catch (error) {
-      console.log(error);
-      setError('Error, try again');
+      setMessage(
+        ErrorAlert({
+          title: 'Ocurrio un error',
+          text: error.message,
+        })
+      );
     }
   };
 
@@ -55,18 +39,23 @@ function Contact() {
         <meta charSet="utf-8" />
         <title>Somos Más - Contacto</title>
       </Helmet>
-      <main className="page">
-        <div className="row">
-          <div className="col-sm-12 col-lg-6">
-            <section
-              className="clean-block clean-hero bg"
+      <Formik
+        initialValues={{ name: '', email: '', phone: '', message: '' }}
+        validationSchema={validation}
+        onSubmit={values => createContact(values)}
+      >
+        <div className="page">
+          <span>{message}</span>
+          <div className="row">
+            <div
+              className="col-sm-12 col-lg-6 clean-block clean-hero bg"
               style={{
                 backgroundImage: `url(${photoBg})`,
                 color: 'rgba(250, 250, 136, 0.85)',
               }}
             >
-              <div className="text">
-                <h1 className="display-2 welcome-text">Contacto</h1>
+              <div className="text mx-sm-5">
+                <h1 className="display-2 welcome-text">Contact Us</h1>
                 <p className="text-justify welcome-text">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
                   molestiae unde reprehenderit maiores natus alias, blanditiis
@@ -74,44 +63,80 @@ function Contact() {
                   assumenda at nulla distinctio itaque tempora modi. Vitae.
                 </p>
               </div>
-            </section>
-          </div>
-          <div className="col-sm-12 col-lg-6">
-            <section
-              style={{
-                paddingTop: '150px',
-              }}
-              className="clean-block clean-form"
-            >
-              <h2 className="text-info">Contactanos</h2>
-              <form className="d-flex flex-column mt-5">
-                <TextInput
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                  label="Nombre de usuario"
-                  placeholder="Nombre"
-                />
-                <EmailInput
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <CustomTextArea
-                  value={message}
-                  label="Mensaje"
-                  placeholder="Escriba su mensaje..."
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-                {error && (
-                  <div className="alert alert-danger" role="alert">
-                    {error}
+            </div>
+            <div className="col-sm-12 col-lg-6">
+              <section
+                style={{
+                  paddingTop: '150px',
+                }}
+                className="clean-block clean-form"
+              >
+                <h2 className="text-info">Contact Us Here!</h2>
+                <Form className="d-flex flex-column mt-5">
+                  <CustomTextInput
+                    type="text"
+                    label="Name"
+                    name="name"
+                    placeholder="Place your name here"
+                  />
+                  <CustomTextInput
+                    type="email"
+                    label="Email"
+                    name="email"
+                    placeholder="example@email.com"
+                  />
+                  <div className="form-group d-flex flex-column">
+                    <label htmlFor="phone" className="text-left">
+                      Phone:
+                    </label>
+                    <Field
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      className="form-control"
+                    />
                   </div>
-                )}
-                <CustomButton onClick={handleSubmit}>Submit</CustomButton>
-              </form>
-            </section>
+                  <div className="form-group d-flex flex-column">
+                    <label htmlFor="message" className="text-left">
+                      Message:
+                    </label>
+                    <Field
+                      type="text"
+                      name="message"
+                      id="message"
+                      className="form-control"
+                      render={({ field, form }) => (
+                        <textarea
+                          className="form-control"
+                          placeholder="Enter your message..."
+                          onChange={e =>
+                            form.setFieldValue(field.name, e.target.value)
+                          }
+                        ></textarea>
+                      )}
+                    />
+                    <ErrorMessage
+                      name="message"
+                      component="span"
+                      className="text-danger text-left"
+                    />
+                  </div>
+                  <div className="row no-gutters">
+                    <div className="col-md-12 col-lg-5">
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              </section>
+            </div>
           </div>
         </div>
-      </main>
+      </Formik>
     </>
   );
 }
