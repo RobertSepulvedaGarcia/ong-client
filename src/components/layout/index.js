@@ -19,44 +19,29 @@ import BackOfficeRoutes from './backOfficeRoutes';
 import MainLayout from '../../layout/MainLayout/MainLayout';
 
 const layout = () => {
-    return ( <
-        AnimatedSwitch atEnter = {
-            { opacity: 0 } }
-        atLeave = {
-            { opacity: 0 } }
-        atActive = {
-            { opacity: 1 } } >
-        { /* <Route path="/activity/:id" component={DetailActivity} />  commented only for presentation */ } { /* PAGE TO LIST ALL THE ACTIVITIES IS MISSING */ } { /* <Route path="/activity" exact component={HomePage} /> commented only for presentation  */ } <
-        MainLayoutRoute path = "/news/:id"
-        component = { NewsDetailedPage }
-        /> <
-        MainLayoutRoute path = "/news"
-        exact component = { NewsPage }
-        /> <
-        MainLayoutRoute path = "/contact-us"
-        component = { ContactPage }
-        /> <
-        MainLayoutRoute path = "/register"
-        component = { RegisterPage }
-        /> <
-        MainLayoutRoute path = "/login"
-        component = { LoginPage }
-        /> <
-        Route path = "/logout" >
-        <
-        MainLayout >
-        <
-        Protected component = { LogoutPage }
-        /> <
-        /MainLayout> <
-        /Route> <
-        MainLayoutRoute path = "/"
-        exact component = { HomePage }
-        /> <
-        BackOfficeRoutes / >
-        <
-        /AnimatedSwitch>
-    );
+  return (
+    <AnimatedSwitch
+      atEnter={{ opacity: 0 }}
+      atLeave={{ opacity: 0 }}
+      atActive={{ opacity: 1 }}
+    >
+      {/* <Route path="/activity/:id" component={DetailActivity} />  commented only for presentation */}
+      {/* PAGE TO LIST ALL THE ACTIVITIES IS MISSING */}
+      {/* <Route path="/activity" exact component={HomePage} /> commented only for presentation  */}
+      <MainLayoutRoute path="/news/:id" component={NewsDetailedPage} />
+      <MainLayoutRoute path="/news" exact component={NewsPage} />
+      <MainLayoutRoute path="/contact-us" component={ContactPage} />
+      <MainLayoutRoute path="/register" component={RegisterPage} />
+      <MainLayoutRoute path="/login" component={LoginPage} />
+      <Route path="/logout">
+        <MainLayout>
+          <Protected component={LogoutPage} />
+        </MainLayout>
+      </Route>
+      <MainLayoutRoute path="/" exact component={HomePage} />
+      <BackOfficeRoutes />
+    </AnimatedSwitch>
+  );
 };
 
 export default layout;
