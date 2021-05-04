@@ -4,5 +4,5 @@ export const links = [
     { text: 'Novedades', route: '/news' },
     { text: 'Contactanos', route: '/contact-us' },
     { text: 'Registrate', route: '/register' },
-    { text: 'Iniciar Secion', route: '/login' },
+    { text: 'Iniciar Sección', route: '/login' },
 ];
