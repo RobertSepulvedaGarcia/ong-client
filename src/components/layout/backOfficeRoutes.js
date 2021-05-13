@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Componentes */
-import HomePage from '../../pages/homeScreen/homeScreen';
+
 import EditActivityPage from '../../pages/Forms/ActivityForm';
 import ActivityBackOffice from '../../pages/BackofficePages/BackofficeActivities/BackofficeActivities';
 import EditOrganizationPage from '../../pages/Forms/EditOrganization/EditOrganization';
@@ -69,20 +69,14 @@ function BackOfficeRoutes() {
         </BackOfficeLayout>
       </Route>
 
-      <Route
-        path="/back-office/categories"
-        exact
-      >
+      <Route path="/back-office/categories" exact>
         <BackOfficeLayout>
-          <ProtectedAdmin component={CategoriesAbm}/>
+          <ProtectedAdmin component={CategoriesAbm} />
         </BackOfficeLayout>
       </Route>
-      <Route
-        path="/back-office/users"
-        exact
-      >
+      <Route path="/back-office/users" exact>
         <BackOfficeLayout>
-          <ProtectedAdmin component={Users}/>
+          <ProtectedAdmin component={Users} />
         </BackOfficeLayout>
       </Route>
       {/* IMPLEMENT BACK-OFFICE COMPONENT */}

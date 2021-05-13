@@ -15,7 +15,7 @@ export default function EditOrganization(props) {
         setOrganizationData(responde.data.data);
       });
     }
-  }, []);
+  });
 
   const registerSchema = Yup.object().shape({
     name: Yup.string().required('No name was provided'),

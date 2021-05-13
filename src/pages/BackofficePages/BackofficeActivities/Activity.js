@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { useHistory, useLocation } from 'react-router';
-import { setActivity, removeActivity } from '../../../components/edit/activities';
+import { removeActivity } from '../../../components/edit/activities';
 import { deleteHttpRequest } from '../../../helper/axios';
 import {
-  selectFetch, failFetch, setLoading, successFetch
-} from '../../../components/fetch/fetchSlice'
-import { useSelector, useDispatch } from 'react-redux'
+  failFetch,
+  setLoading,
+  successFetch,
+} from '../../../components/fetch/fetchSlice';
+import { useDispatch } from 'react-redux';
 
 function Activity({ activity }) {
   const dispatch = useDispatch();
@@ -17,22 +19,21 @@ function Activity({ activity }) {
   };
 
   const handleDelete = async () => {
-    dispatch(setLoading())
+    dispatch(setLoading());
     try {
       await deleteHttpRequest(`/activities/${activity.id}`);
-      dispatch(successFetch("Borrado con exito"))
-      dispatch(removeActivity(activity.id))
+      dispatch(successFetch('Borrado con exito'));
+      dispatch(removeActivity(activity.id));
+    } catch (e) {
+      dispatch(failFetch(e));
     }
-    catch (e) {
-      dispatch(failFetch(e))
-    }
-  }
+  };
   return (
     <React.Fragment key={activity.id}>
       <td style={{ verticalAlign: 'inherit' }}> {activity.id} </td>
       <td style={{ verticalAlign: 'inherit' }}> {activity.name} </td>
 
-      <td className="text-center"/*  style={{ textAlign: 'center' }} */>
+      <td className="text-center" /*  style={{ textAlign: 'center' }} */>
         {/*  <div className="row">
         <div className=" col-sm-2 col-md-6 col-lg-6">
           <button className="btn btn-primary text-white ml-1" onClick={handleEdit}>
@@ -48,18 +49,21 @@ function Activity({ activity }) {
         </div>
       </div> */}
 
-
-        <button className="btn btn-primary text-white ml-1 w-auto" onClick={handleEdit}>
+        <button
+          className="btn btn-primary text-white ml-1 w-auto"
+          onClick={handleEdit}
+        >
           Editar
-                </button>
-        <button className="btn btn-danger text-white ml-1 w-auto " onClick={handleDelete} >
+        </button>
+        <button
+          className="btn btn-danger text-white ml-1 w-auto "
+          onClick={handleDelete}
+        >
           Borrar
-              </button>
+        </button>
       </td>
-    </React.Fragment >
+    </React.Fragment>
   );
 }
 
 export default Activity;
-
-

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import { requestNews } from './utils';
 import ErrorAlert from '../../components/Alerts/ErrorAlert';
@@ -15,8 +15,8 @@ function Index() {
   useEffect(() => {
     if (id) {
       requestNews(id)
-        .then((res) => setDetailNew(res.data))
-        .catch((err) =>
+        .then(res => setDetailNew(res.data))
+        .catch(err =>
           setMessage(
             ErrorAlert({
               title: 'Ocurrio un error!',

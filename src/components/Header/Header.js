@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { links } from '../../utils/navMenuLinks';
-import { getHttpRequest } from '../../helper/axios/index';
-import Loader from '../../components/Loader';
+
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/LOGO-SOMOS-MAS.png';
 
 const Header = () => {
-  const [state, setState] = useState({});
-
   // useEffect(() => {  Comented due to Presentation
   //   getHttpRequest(`${process.env.REACT_APP_API_URL}/organizations/1/public`)
   //     .then(res => {

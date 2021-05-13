@@ -15,7 +15,12 @@ function NewsForm(props) {
   const [news, setNews] = useState('');
   const [forEdit, setForEdit] = useState(false);
   const history = useHistory();
-
+  const inicialValues = {
+    name: news.name || '',
+    image: news.image || '',
+    categoryId: news.categoryId || '',
+    content: news.content || '',
+  };
   useEffect(() => {
     if (id !== '0') {
       getHttpRequest(`/news/${id}`).then(response => {
@@ -26,7 +31,7 @@ function NewsForm(props) {
       setForEdit(false);
       setNews(inicialValues);
     }
-  }, []);
+  }, [id]);
 
   const handlePost = async values => {
     const { name, content, image, categoryId } = values;
@@ -56,13 +61,6 @@ function NewsForm(props) {
 
     await putHttpRequest(`/news/${news.id}`, data);
     history.push('/back-office/news');
-  };
- 
-  const inicialValues = {
-    name: news.name || '',
-    image: news.image || '',
-    categoryId: news.categoryId || '',
-    content: news.content || '',
   };
 
   return (

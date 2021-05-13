@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import ErrorAlert from '../../../components/Alerts/ErrorAlert';
@@ -27,7 +27,7 @@ function FormLogin() {
   //and this fix the problem with Bootstrap
 
   //State to the messages to show
-  const [message, setMessage] = useState();
+  const [setMessage] = useState();
   const [redirect, setRedirect] = useState();
 
   const dispatch = useDispatch();
@@ -40,17 +40,17 @@ function FormLogin() {
   const handleLogin = (user, setSubmitting) => {
     const { email, password } = user;
     postHttpRequest('/auth/login', { email, password })
-      .then((res) => {
+      .then(res => {
         const { token } = res.data;
         window.localStorage.setItem('token', token);
         // save user Info in Redux
-        getHttpRequest('/auth/me').then((res) => {
+        getHttpRequest('/auth/me').then(res => {
           console.log(res.data);
           dispatch(login(res.data));
           setRedirect('/');
         });
       })
-      .catch((error) => {
+      .catch(error => {
         let errorMessage = 'Ha ocurrido un error al iniciar sesión.';
         if (error.response) {
           errorMessage = error.response.data.error || errorMessage;
@@ -162,8 +162,9 @@ function FormLogin() {
                       <button
                         type="submit"
                         className="btn custom__btn-forms"
-                        style={{ background: "#9ac9fb" }}
-                        disabled={isSubmitting}>
+                        style={{ background: '#9ac9fb' }}
+                        disabled={isSubmitting}
+                      >
                         Entrar
                       </button>
                     </div>

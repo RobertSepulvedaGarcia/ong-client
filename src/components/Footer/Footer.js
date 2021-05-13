@@ -2,12 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Footer.css';
 const Footer = () => {
-  const [user, setUser] = useState({
-    name: '',
-    image: '',
-    address: '',
-  });
-
   const [socialMedia, setSocialMedia] = useState({
     facebook: '',
     instagram: '',
@@ -19,21 +13,12 @@ const Footer = () => {
       const res = await axios.get(
         `${process.env.REACT_APP_API_URL}/organizations/1/public`
       );
-      const {
-        name,
-        image,
-        address,
-        facebook,
-        instagram,
-        linkedin,
-      } = res.data.data;
-      setUser({ name, image, address });
+      const { facebook, instagram, linkedin } = res.data.data;
+
       setSocialMedia({ facebook, instagram, linkedin });
     };
     loadData();
   }, []);
-
-  const { name, image, address } = user;
 
   return (
     <footer className="page-footer bg-red">

@@ -29,7 +29,7 @@ const RegisterForm = () => {
     if (localStorage.getItem('token')) {
       history.push('/');
     }
-  }, []);
+  });
 
   //Redirect to "/" when the request is ok
   if (redirect) {
@@ -37,9 +37,9 @@ const RegisterForm = () => {
   }
 
   //handle the petition to requestLogin, and set message to what is return
-  const handleRegister = (user) => {
+  const handleRegister = user => {
     postData(user, setRedirect)
-      .then((res) => {
+      .then(res => {
         if (res.error) {
           setMessage(
             ErrorAlert({
@@ -49,7 +49,7 @@ const RegisterForm = () => {
           );
         }
       })
-      .catch((err) => err);
+      .catch(err => err);
   };
 
   return (
@@ -66,7 +66,7 @@ const RegisterForm = () => {
             </div>
             <Formik
               initialValues={inicialValues}
-              onSubmit={(values) => handleRegister(values)}
+              onSubmit={values => handleRegister(values)}
               validationSchema={registerSchema}
             >
               <Form className="content d-flex flex-column">
@@ -112,9 +112,10 @@ const RegisterForm = () => {
                   />
                 </div>
                 <button
-                  style={{ background: "#9ac9fb" }}
+                  style={{ background: '#9ac9fb' }}
                   type="submit"
-                  className="btn custom__btn-forms ">
+                  className="btn custom__btn-forms "
+                >
                   Registrar
                 </button>
               </Form>
