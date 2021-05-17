@@ -12,7 +12,7 @@ const Categories = () => {
         setState(res.data);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [state]);
 
   const deleteCategory = id => {
     Swal.fire(

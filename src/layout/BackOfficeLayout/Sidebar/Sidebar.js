@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import LogoDefault from '../../../logo-default.png';
 import NavItem from './NavItem';
@@ -16,8 +17,11 @@ export default function Sidebar() {
   return (
     <div id="sidebar" className={styles.sidebar}>
       <div className={styles.logo}>
-        <img src={LogoDefault} alt="logo" className={styles.logoImg} />
+        <Link to="/">
+          <img src={LogoDefault} alt="logo" className={styles.logoImg} />
+        </Link>
       </div>
+
       <NavSidebar titleNav="General">
         <NavItem
           to="/back-office"

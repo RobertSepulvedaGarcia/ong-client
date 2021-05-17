@@ -11,12 +11,12 @@ class NewsPublic extends React.Component {
   //function to get news from db
   componentDidMount() {
     getHttpRequest('/news')
-      .then((res) => {
+      .then(res => {
         this.setState({
           data: res.data,
         });
       })
-      .catch((err) => console.log("Couldn't fetch data. Error: " + err));
+      .catch(err => console.log("Couldn't fetch data. Error: " + err));
   }
 
   render() {
@@ -37,11 +37,13 @@ class NewsPublic extends React.Component {
                 </p>
               </div>
               <div className="row justify-content-center">
-                {this.state.data.map((element) => (
+                {this.state.data.map(element => (
                   <div key={element.id} className="col-sm-6 col-lg-4">
                     <div className="card text-center clean-card">
                       <img
-                        src={element.image}
+                        src={
+                          'https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png'
+                        }
                         className="card-img-top"
                         alt="img"
                       />

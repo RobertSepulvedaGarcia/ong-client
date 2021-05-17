@@ -11,7 +11,7 @@ export const userSlice = createSlice({
         },
         logout: state => {
             window.localStorage.removeItem('token');
-            // clear persistent user
+            window.location.reload('/');
             state.user = null;
         },
     },

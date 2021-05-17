@@ -22,7 +22,7 @@ const Categories = () => {
         });
       })
       .catch(err => console.error(err));
-  });
+  }, []);
 
   const onUpdate = id => {
     window.scroll(0, 0);

@@ -9,6 +9,7 @@ import {
   putHttpRequest,
   getHttpRequest,
 } from '../../../helper/axios';
+import Swal from 'sweetalert2';
 
 function NewsForm(props) {
   const { id } = useParams();
@@ -43,8 +44,9 @@ function NewsForm(props) {
       image: image.name,
       categoryId: categoryId,
     };
-    await postHttpRequest('/news', data);
 
+    await postHttpRequest('/news', data);
+    Swal.fire('Bien!', 'Noticia creada exitosamente.', 'success');
     history.push('/back-office/news');
   };
 
@@ -60,6 +62,7 @@ function NewsForm(props) {
     };
 
     await putHttpRequest(`/news/${news.id}`, data);
+    Swal.fire('Bien!', 'Noticia editada exitosamente.', 'success');
     history.push('/back-office/news');
   };
 

@@ -24,7 +24,9 @@ export default function Navbar() {
             Admin
           </span>
         )}
-        <span className="d-none d-sm-block">{userLogged && userLogged.firstName}</span>
+        <span className="d-none d-sm-block">
+          {userLogged && userLogged.firstName}
+        </span>
         <Avatar imageUrl={userLogged && userLogged.image} />
       </div>
     </nav>
